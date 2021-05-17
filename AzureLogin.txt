@@ -1,0 +1,50 @@
+##############################################
+# Log to Azure Tenant                       ##
+##############################################
+
+az login
+
+##############################################
+# Create Service Principal dor Suscripction ##
+##############################################
+
+az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/xxxxxxxxxxxx-xxxxx-xxxxxx"
+
+{
+  "appId": "xxxxxxxxxxxx-xxxxx-xxxxxx",
+  "displayName": "azure-cli-2021-05-17-19-14-13",
+  "name": "http://azure-cli-2021-05-17-19-14-13",
+  "password": "xxxxxxxxxxxx-xxxxx-xxxxxx",
+  "tenant": "xxxxxxxxxxxx-xxxxx-xxxxxx"
+}
+
+##############################################
+#   Login on Azure with SP                  ##
+##############################################
+
+az login --service-principal -u "xxxxxxxxxxxx-xxxxx-xxxxxx" -p "xxxxxxxxxxxx-xxxxx-xxxxxx" --tenant "xxxxxxxxxxxx-xxxxx-xxxxxx"
+az account set --subscription="xxxxxxxxxxxx-xxxxx-xxxxxx"
+
+
+Set the current Azure subscription
+A Microsoft account can be associated with multiple Azure subscriptions. The following steps outline how you can switch between your subscriptions:
+
+To view the current Azure subscription, use az account show.
+
+Azure CLI
+
+az account show
+If you have access to multiple available Azure subscriptions, use az account list to display a list of subscription name ID values:
+
+Azure CLI
+
+az account list --query "[].{name:name, subscriptionId:id}"
+To use a specific Azure subscription for the current Cloud Shell session, use az account set. Replace the <subscription_id> placeholder with the ID (or name) of the subscription you want to use:
+
+Azure CLI
+
+az account set --subscription="<subscription_id>"
+
+--------------------------------------------------------------------------------------------------------------------------
+
+
